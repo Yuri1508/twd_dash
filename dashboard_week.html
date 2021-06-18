@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+
+        <title>Dashboard TWD</title>
+
+        <style>
+            * {
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="row pt-5" style="justify-content: center;">
+            <div class="col-md-3">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <label for="date"> Date Début : </label>
+                            <input id="date" class="Dstart" name="date" type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <label for="date"> Date Fin : </label>
+                            <input id="date" class="Dend" name="date" type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="jumbotron">
+                <!--Section: Demo-->
+                <section class="border p-4 mb-4 d-flex justify-content-center">
+                    <div class="col-lg-7">
+                        <div id="chart-bar-double-datasets-example" class="chart">
+                            <div class="chartjs-size-monitor">
+                                <div class="chartjs-size-monitor-expand">
+                                    <div class=""></div>
+                                </div>
+                                <div class="chartjs-size-monitor-shrink">
+                                    <div class=""></div>
+                                </div>
+                            </div><canvas width="564" height="282" style="display: block; width: 564px; height: 282px;"
+                                class="chartjs-render-monitor"></canvas>
+                        </div>
+                    </div>
+                </section>
+                <!--Section: Demo-->
+            </div>
+        </div>
+
+
+        <script src="assets/js/jquery.js"></script>
+        <script src="./assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="./assets/js/loader.js" type="text/javascript"></script>
+
+
+        <script>
+
+            jQuery(document).ready(function($) {
+
+                $('.Dstart').change(function(){
+                    Dstart = $('.Dstart').val();
+                    Dend = $('.Dend').val();
+
+                    getAjax(Dstart,Dend);
+                })
+
+                $('.Dend').change(function(){
+                    Dstart = $('.Dstart').val();
+                    Dend = $('.Dend').val();
+
+                    getAjax(Dstart,Dend);
+                })
+            })
+
+            function getAjax(Dstart,Dend){
+                $.ajax({
+                    type: 'post',
+                    url: "ajax.php",
+                    data: {
+                        'Dstart': Dstart,
+                        'Dend': Dend
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        alert('succes');
+                    }
+                });
+            }
+        </script>
+
+        <script type="text/javascript"
+        src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/js/mdb5/3.8.0/compiled.min.js?ver=3.8.0-update.4"
+        id="mdb-js2-js"></script>
+
+        <!-- Chart bar double datasets example -->
+        <script>
+        // Data
+        const dataChartBarDoubleDatasetsExample = {
+            type: 'bar',
+            data: {
+                labels: ['Desktop', 'Mobile', 'Tablet'],
+
+                datasets: [
+                    {
+                        label: 'Users',
+                        data: [510, 653, 255],
+                        backgroundColor: '#DAAB3A',
+                        borderColor: 'aliceblue',
+                    },
+                    {
+                        label: 'Page views',
+                        data: [1251, 1553, 1355],
+                        backgroundColor: 'blue',
+                        borderColor: 'aliceblue',
+                    },
+                ],
+            },
+        };
+
+        // Options
+        const optionsChartBarDoubleDatasetsExample = {
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            stacked: false,
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                        },
+                    ],
+                    xAxes: [
+                        {
+                            stacked: false,
+                        },
+                    ],
+                },
+            },
+        };
+
+        new mdb.Chart(
+            document.getElementById('chart-bar-double-datasets-example'),
+            dataChartBarDoubleDatasetsExample,
+            optionsChartBarDoubleDatasetsExample
+        );
+        </script>
+    </body>
+</html>
