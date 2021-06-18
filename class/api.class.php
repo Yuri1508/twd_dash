@@ -13,38 +13,12 @@
         curl_setopt($ch, CURLOPT_URL,$url);
         // Execute
         $j_data=curl_exec($ch);
-        // Closing
+        // // // Closing
         // curl_close($ch);
 
-        
         $t_result = json_decode($j_data,true);
 
-        // get all time 
-        foreach($t_result[$Dstart]["T"] as $stime => $value){
-
-            $t_time['T'][] = $stime;
-        }
-
-        foreach($t_result[$Dstart]["M"] as $stime => $value){
-
-            $t_time['M'][] = $stime;
-        }
-
-        // build array t_data
-        foreach($t_time['T'] as $v){
-
-            $t_data['data']['T'][] = $t_result[$Dstart]["T"][$v];
-        }
-
-        foreach($t_time['M'] as $v){
-
-            $t_data['data']['M'][] = $t_result[$Dstart]["M"][$v];
-        }
-
-
-        return json_encode($t_data);
+        return $t_result;
         }
     }
-
-
 ?>
