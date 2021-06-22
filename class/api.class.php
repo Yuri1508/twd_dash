@@ -13,8 +13,8 @@
         curl_setopt($ch, CURLOPT_URL,$url);
         // Execute
         $j_data=curl_exec($ch);
-        // // // Closing
-        // curl_close($ch);
+        // Closing
+        curl_close($ch);
 
         $t_result = json_decode($j_data,true);
 
