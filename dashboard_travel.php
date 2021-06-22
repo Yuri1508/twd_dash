@@ -142,182 +142,181 @@ while ($row = mysqli_fetch_object($list_data_fm)) {
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-        <title>Dashboard TWD</title>
+    <title>Dashboard TWD</title>
 
-        <style>
-            .row {
-                width: 100%;
-            }
+    <style>
+        .row {
+            width: 100%;
+        }
+        .cardDash {
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 2px 3px 10px grey;
+        }
+    </style>
+</head>
 
-            .cardDash {
-                padding: 20px;
-                border-radius: 50px;
-                box-shadow: 2px 3px 10px grey;
-            }
-        </style>
-    </head>
-
-    <body>
-
-
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Dashboard TWD</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="dashboard_travel.php">Journalier</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dashboard_week.php">Période</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<body>
 
 
-        <!-- formulaire -->
-        <form action="" method="post">
-            <div class="row pt-5" style="justify-content: center;">
-                <div class="col-md-4">
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="card mb-2">
-                                <div class="form-group">
-                                    <label for="date"> Date de votre choix </label>
-                                    <input type="date" class="Dstart form-control" name="day" value="p_start" type="date">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- boutton -->
-                <div class="col-md-2">
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="card">
-                                <button type="submit" name="btn" class="btn-outline-primary form-control" value="récup">VALID</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-
-        
-        <div class="container">
-            <div class="jumbotron">
-                <!--Section: Demo-->
-                <section class="border p-4 mb-4 d-flex justify-content-center">
-                    <div class="cardDash">
-                        <div class="row mb-4">
-                            <div class="col-lg-6">
-                                <canvas id="lineChartCatamTahiti" style="height: 400px; "></canvas>
-                            </div>
-                            <div class="col-lg-6">
-                                <canvas id="lineChartFerryTahiti" style="height: 400px; "></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Dashboard TWD</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="dashboard_travel.php">Journalier</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard_week.php">Période</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <script src="assets/js/jquery.js" type="text/javascript" ></script>
-        <script src="./assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-        <script src="./assets/js/loader.js" type="text/javascript"></script>
 
-        <script type="text/javascript" src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/js/mdb5/3.8.0/compiled.min.js?ver=3.8.0-update.4" id="mdb-js2-js"></script>
+    <!-- formulaire -->
+    <form action="" method="post">
+        <div class="row pt-5" style="justify-content: center;">
+            <div class="col-md-4">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card mb-2">
+                            <div class="form-group">
+                                <label for="date"> Date de votre choix </label>
+                                <input type="date" class="Dstart form-control" name="day" value="p_start" type="date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- TAHITI -->
-        <!-- CATAM -->
-        <script type="text/javascript">
-            var ctxL = document.getElementById("lineChartCatamTahiti").getContext('2d');
-            var myLineChart = new Chart(ctxL, {
-                type: 'line',
-                data: {
-                    labels: <?php echo json_encode($ct_label, JSON_NUMERIC_CHECK); ?>,
-                    datasets: [{
-                            label: "CATAM Tahiti",
-                            data: <?php echo json_encode($c_tahiti, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: [
-                                'rgba(0, 0, 0, 0)',
-                            ],
-                            borderColor: [
-                                '#521BFA',
-                            ],
-                            borderWidth: 4
-                        },
-                        {
-                            label: "CATAM Moorea",
-                            data: <?php echo json_encode($c_moorea, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: [
-                                'rgba(0, 0, 0, 0)',
-                            ],
-                            borderColor: [
-                                '#55FA77',
-                            ],
-                            borderWidth: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
+            <!-- boutton -->
+            <div class="col-md-2">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <button type="submit" name="btn" class="btn-outline-primary form-control" value="récup">VALID</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
-                }
-            });
-        </script>
 
-        <!-- TAHITI -->
-        <!-- FERRY -->
-        <script type="text/javascript">
-            var ctxL = document.getElementById("lineChartFerryTahiti").getContext('2d');
-            var myLineChart = new Chart(ctxL, {
-                type: 'line',
-                data: {
-                    labels: <?php echo json_encode($ft_label, JSON_NUMERIC_CHECK); ?>,
-                    datasets: [{
-                            label: "FERRY Tahiti",
-                            data: <?php echo json_encode($f_tahiti, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: [
-                                'rgba(0, 0, 0, 0)',
-                            ],
-                            borderColor: [
-                                '#F0ED51',
-                            ],
-                            borderWidth: 4
-                        },
-                        {
-                            label: "FERRY Moorea",
-                            data: <?php echo json_encode($f_moorea, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: [
-                                'rgba(0, 0, 0, 0)',
-                            ],
-                            borderColor: [
-                                '#58C0E3',
-                            ],
-                            borderWidth: 4
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                }
-            });
-        </script>
-    </body>
+    <div class="container">
+        <div class="jumbotron">
+            <!--Section: Demo-->
+            <section class="border p-4 mb-4 d-flex justify-content-center">
+                <div class="cardDash">
+                    <div class="row mb-4">
+                        <div class="col-lg-6">
+                            <canvas id="lineChartCatamTahiti" style="height: 400px; "></canvas>
+                        </div>
+                        <div class="col-lg-6">
+                            <canvas id="lineChartFerryTahiti" style="height: 400px; "></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="./assets/js/loader.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/js/mdb5/3.8.0/compiled.min.js?ver=3.8.0-update.4" id="mdb-js2-js"></script>
+
+    <!-- TAHITI -->
+    <!-- CATAM -->
+    <script type="text/javascript">
+        var ctxL = document.getElementById("lineChartCatamTahiti").getContext('2d');
+        var myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($ct_label, JSON_NUMERIC_CHECK); ?>,
+                datasets: [{
+                        label: "CATAM Tahiti",
+                        data: <?php echo json_encode($c_tahiti, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: [
+                            'rgba(0, 0, 0, 0)',
+                        ],
+                        borderColor: [
+                            '#DAA520',
+                        ],
+                        borderWidth: 4
+                    },
+                    {
+                        label: "CATAM Moorea",
+                        data: <?php echo json_encode($c_moorea, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: [
+                            'rgba(0, 0, 0, 0)',
+                        ],
+                        borderColor: [
+                            '#9400D3',
+                        ],
+                        borderWidth: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+
+            }
+        });
+    </script>
+
+    <!-- TAHITI -->
+    <!-- FERRY -->
+    <script type="text/javascript">
+        var ctxL = document.getElementById("lineChartFerryTahiti").getContext('2d');
+        var myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($ft_label, JSON_NUMERIC_CHECK); ?>,
+                datasets: [{
+                        label: "FERRY Tahiti",
+                        data: <?php echo json_encode($f_tahiti, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: [
+                            'rgba(0, 0, 0, 0)',
+                        ],
+                        borderColor: [
+                            '#008000',
+                        ],
+                        borderWidth: 4
+                    },
+                    {
+                        label: "FERRY Moorea",
+                        data: <?php echo json_encode($f_moorea, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: [
+                            'rgba(0, 0, 0, 0)',
+                        ],
+                        borderColor: [
+                            '#0000FF',
+                        ],
+                        borderWidth: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+    </script>
+</body>
 
 </html>

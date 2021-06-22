@@ -196,192 +196,205 @@ while ($row = mysqli_fetch_object($list_db_api)) {
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-        <title>Dashboard TWD</title>
+    <title>Dashboard TWD</title>
 
-        <style>
-            .row {
-                width: 100%;
-            }
-        </style>
+    <style>
+        .row {
+            width: 100%;
+        }
 
-    </head>
+        .jumbotronDash {
+            padding: 20px;
+            border-radius: 50px;
+            box-shadow: 2px 3px 10px grey;
+        }
+    </style>
 
-    <body>
+</head>
 
-        <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Dashboard TWD</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="dashboard_travel.php">Journalier</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="dashboard_week.php">Période</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<body>
 
-        <!-- formulaire -->
-        <form action="" method="post">
-            <div class="row pt-5" style="justify-content: center;">
 
-                <!-- date de debut -->
-                <div class="col-md-2">
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="card">
-                                <label for="date"> Date Début : </label>
-                                <input id="date" class="Dstart" name="start_day" type="date">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- date de fin -->
-                <div class="col-md-2">
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="card">
-                                <label for="date"> Date Fin : </label>
-                                <input id="date" class="Dend" name="end_day" type="date">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- selection du jour -->
-                <div class="col-md-2">
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="card">
-                                <label for="date"> Jours </label>
-                                <select name="day" class="form-control">
-                                    <option value="Monday">
-                                        lundi
-                                    </option>
-                                    <option value="Tuesday">
-                                        mardi
-                                    </option>
-                                    <option value="Wednesday">
-                                        mercredi
-                                    </option>
-                                    <option value="Thursday">
-                                        jeudi
-                                    </option>
-                                    <option value="Friday">
-                                        vendredi
-                                    </option>
-                                    <option value="Saturday">
-                                        samedi
-                                    </option>
-                                    <option value="Sunday">
-                                        dimanche
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- boutton -->
-                <div class="col-md-2">
-                    <div class="container">
-                        <div class="jumbotron">
-                            <div class="card">
-                                <button type="submit" name="btn" class="btn-outline-primary form-control" value="récup">VALID</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="container">
-            <div class="jumbotron">
-                <section class="border  d-flex justify-content-center">
-                    <div class="col-lg-7">
-                        <div id="chart-bar" style="height: 100%;" class="chart"></div>
-                    </div>
-                </section>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Dashboard TWD</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="dashboard_travel.php">Journalier</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard_week.php">Période</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
 
-        <script src="assets/js/jquery.js" type="text/javascript"></script>
-        <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
-        <script src="assets/js/loader.js" type="text/javascript"></script>
+    <!-- formulaire -->
+    <form action="" method="post">
+        <div class="row pt-5" style="justify-content: center;">
 
-        <script type="text/javascript" src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/js/mdb5/3.8.0/compiled.min.js?ver=3.8.0-update.4" id="mdb-js2-js"></script>
+            <!-- date de debut -->
+            <div class="col-md-2">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <label for="date"> Date Début : </label>
+                            <input id="date" class="Dstart" name="start_day" type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Chart bar double datasets example -->
-        <script type="text/javascript">
-            // Data
-            const dataChartBarDoubleDatasetsExample = {
-                type: 'bar',
-                data: {
-                    labels: <?php echo json_encode($label, JSON_NUMERIC_CHECK); ?>,
 
-                    datasets: [{
-                            label: 'Catam Tahiti',
-                            data: <?php echo json_encode($c_tahiti, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: '#521BFA',
-                            borderColor: 'aliceblue',
-                        },
-                        {
-                            label: 'Ferry Tahiti',
-                            data: <?php echo json_encode($f_tahiti, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: '#F0ED51',
-                            borderColor: 'aliceblue',
-                        },
-                        {
-                            label: 'Catam Moorea',
-                            data: <?php echo json_encode($c_moorea, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: '#55FA77',
-                            borderColor: 'aliceblue',
-                        },
-                        {
-                            label: 'Ferry Moorea',
-                            data: <?php echo json_encode($f_moorea, JSON_NUMERIC_CHECK); ?>,
-                            backgroundColor: '#58C0E3',
-                            borderColor: 'aliceblue',
-                        }
-                    ],
-                },
-            };
+            <!-- date de fin -->
+            <div class="col-md-2">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <label for="date"> Date Fin : </label>
+                            <input id="date" class="Dend" name="end_day" type="date">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            // Options
-            const optionsChartBarDoubleDatasetsExample = {
-                options: {
-                    scales: {
-                        yAxes: [{
-                            stacked: false,
-                            ticks: {
-                                beginAtZero: true,
-                            },
-                        }, ],
-                        xAxes: [{
-                            stacked: false,
-                        }, ],
+
+            <!-- selection du jour -->
+            <div class="col-md-2">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <label for="date"> Jours </label>
+                            <select name="day" class="form-control">
+                                <option value="Monday">
+                                    lundi
+                                </option>
+                                <option value="Tuesday">
+                                    mardi
+                                </option>
+                                <option value="Wednesday">
+                                    mercredi
+                                </option>
+                                <option value="Thursday">
+                                    jeudi
+                                </option>
+                                <option value="Friday">
+                                    vendredi
+                                </option>
+                                <option value="Saturday">
+                                    samedi
+                                </option>
+                                <option value="Sunday">
+                                    dimanche
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- boutton -->
+            <div class="col-md-2">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="card">
+                            <button type="submit" name="btn" class="btn-outline-primary form-control" value="récup">VALID</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <div class="container">
+        <div class="jumbotronDash">
+            <section class="border  d-flex justify-content-center">
+                <div class="col-lg-7">
+                    <div id="chart-bar" style="height: 100%;" class="chart"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <script src="assets/js/jquery.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="assets/js/loader.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/js/mdb5/3.8.0/compiled.min.js?ver=3.8.0-update.4" id="mdb-js2-js"></script>
+
+    <!-- Chart bar double datasets example -->
+    <script type="text/javascript">
+        // Data
+        const dataChartBarDoubleDatasetsExample = {
+            type: 'bar',
+            data: {
+                labels: <?php echo json_encode($label, JSON_NUMERIC_CHECK); ?>,
+
+                datasets: [{
+                        label: 'Catam Tahiti',
+                        data: <?php echo json_encode($c_tahiti, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: '#DAA520',
+                        borderColor: 'aliceblue',
+                    },
+                    {
+                        label: 'Ferry Tahiti',
+                        data: <?php echo json_encode($f_tahiti, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: '#008000',
+                        borderColor: 'aliceblue',
+                    },
+                    {
+                        label: 'Catam Moorea',
+                        data: <?php echo json_encode($c_moorea, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: '#9400D3',
+                        borderColor: 'aliceblue',
+                    },
+                    {
+                        label: 'Ferry Moorea',
+                        data: <?php echo json_encode($f_moorea, JSON_NUMERIC_CHECK); ?>,
+                        backgroundColor: '#0000FF',
+                        borderColor: 'aliceblue',
                     }
-                },
-            };
+                ],
+            },
+        };
 
-            new mdb.Chart(
-                document.getElementById('chart-bar'), dataChartBarDoubleDatasetsExample, optionsChartBarDoubleDatasetsExample);
-        </script>
+        // Options
+        const optionsChartBarDoubleDatasetsExample = {
+            options: {
+                scales: {
+                    yAxes: [{
+                        stacked: false,
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    }, ],
+                    xAxes: [{
+                        stacked: false,
+                    }, ],
+                }
+            },
+        };
 
-    </body>
+        new mdb.Chart(
+            document.getElementById('chart-bar'), dataChartBarDoubleDatasetsExample, optionsChartBarDoubleDatasetsExample);
+    </script>
+
+</body>
+
 </html>
